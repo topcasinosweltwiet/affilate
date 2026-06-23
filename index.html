@@ -300,8 +300,8 @@ function loadAffStats(){
         if(e.status==='pending')pendingPayout+=(e.amount||0);
       });
     } else {
-      // Calculate from deposits
-      totalEarned=Math.floor(totalDep*commRate);
+      // Calculate: 25% of losses - 30% of wins
+      totalEarned=Math.max(0,Math.floor(totalLost*0.25)-Math.floor(totalWon*0.30));
       pendingPayout=totalEarned;
     }
     // Subtract paid withdrawals
