@@ -2,497 +2,776 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/>
 <title>2xWin — Partner Panel</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
+*{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --bg:#050a18;--bg2:#0a1525;--card:#0d1f3c;
-  --border:#1a3a7c;--border2:rgba(255,255,255,0.08);
-  --hdr:#0d1f3c;--accent:#4ade80;--accent2:#f6c90e;
-  --txt:#e0e8ff;--txt2:#4a6ab0;--red:#e74c3c;--blue:#3b82f6;
+  --bg:#0a0f1e;
+  --bg2:#0f1628;
+  --card:#141c32;
+  --card2:#1a2340;
+  --border:#1e2d4d;
+  --txt:#e8eaf6;
+  --txt2:#7b8db0;
+  --accent:#4ade80;
+  --accent2:#f6c90e;
+  --red:#ef4444;
+  --blue:#3b82f6;
+  --purple:#a855f7;
+  --grad:linear-gradient(135deg,#1a2340,#141c32);
 }
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;}
+body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',sans-serif;min-height:100vh;}
 
-/* ── AUTH ── */
-#p-auth{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at top,#0d2460 0%,#050a18 60%);}
-.auth-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2.5rem 2rem;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
-.auth-logo{font-size:28px;font-weight:900;color:#fff;text-align:center;margin-bottom:4px;}
-.auth-logo span{color:var(--accent2);}
-.auth-sub{text-align:center;font-size:12px;color:var(--txt2);margin-bottom:2rem;letter-spacing:1px;text-transform:uppercase;}
-.auth-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--accent);font-weight:700;margin:0 auto 1.5rem;display:flex;justify-content:center;}
-.af{margin-bottom:14px;}
-.af label{font-size:11px;font-weight:700;color:var(--txt2);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;}
-.af input{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--border);background:rgba(255,255,255,0.04);color:var(--txt);font-size:14px;outline:none;transition:border-color 0.2s;}
-.af input:focus{border-color:var(--accent);}
-.auth-btn{width:100%;padding:13px;background:var(--accent);color:#000;border:none;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;margin-top:8px;transition:opacity 0.2s;}
+/* ── AUTH PAGE ── */
+#p-auth{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;
+  background:radial-gradient(ellipse at top,#0d1a3a 0%,#050a14 60%);}
+.auth-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:40px 32px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+.auth-logo{text-align:center;margin-bottom:28px;}
+.auth-logo-text{font-size:28px;font-weight:900;color:#fff;letter-spacing:-0.5px;}
+.auth-logo-text span{color:var(--accent);}
+.auth-badge{display:inline-block;background:rgba(74,222,128,0.1);color:var(--accent);border:1px solid rgba(74,222,128,0.2);border-radius:20px;font-size:11px;font-weight:700;padding:3px 12px;margin-top:6px;letter-spacing:1px;}
+.auth-title{font-size:18px;font-weight:800;color:#fff;margin-bottom:6px;}
+.auth-sub{font-size:13px;color:var(--txt2);margin-bottom:24px;}
+.auth-field{margin-bottom:14px;}
+.auth-field label{font-size:11px;font-weight:700;color:var(--txt2);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;}
+.auth-field input{width:100%;padding:12px 14px;background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;color:var(--txt);font-size:14px;outline:none;transition:border-color 0.2s;}
+.auth-field input:focus{border-color:var(--accent);}
+.auth-btn{width:100%;padding:14px;background:linear-gradient(135deg,#22c55e,#16a34a);color:#000;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;margin-top:6px;transition:opacity 0.2s;}
 .auth-btn:hover{opacity:0.9;}
-.aerr{background:rgba(231,76,60,0.1);color:var(--red);border:1px solid rgba(231,76,60,0.2);border-radius:8px;padding:9px 12px;font-size:13px;margin-top:10px;display:none;}
+.auth-err{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);color:#ef4444;border-radius:8px;padding:10px 12px;font-size:13px;margin-top:10px;display:none;}
 
-/* ── HEADER ── */
-#p-main{display:none;}
-.aff-header{background:var(--hdr);border-bottom:1px solid var(--border);padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
-.aff-logo{font-size:20px;font-weight:900;color:#fff;}
-.aff-logo span{color:var(--accent2);}
-.aff-badge{background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.3);border-radius:20px;padding:3px 12px;font-size:11px;color:var(--accent);font-weight:700;}
-.aff-user{display:flex;align-items:center;gap:10px;}
-.aff-username{font-size:13px;font-weight:700;color:var(--txt);}
-.logout-btn{padding:6px 14px;background:rgba(231,76,60,0.1);color:var(--red);border:1px solid rgba(231,76,60,0.3);border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;}
+/* ── MAIN APP ── */
+#p-main{display:none;min-height:100vh;}
 
-/* ── LAYOUT ── */
-.aff-wrap{max-width:900px;margin:0 auto;padding:1.5rem 1rem 3rem;}
+/* Sidebar */
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:220px;background:var(--card);border-right:1px solid var(--border);z-index:100;display:flex;flex-direction:column;padding:20px 0;}
+.sidebar-logo{padding:0 20px 20px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.sidebar-logo-text{font-size:20px;font-weight:900;color:#fff;}
+.sidebar-logo-text span{color:var(--accent);}
+.sidebar-badge{font-size:9px;color:var(--txt2);font-weight:600;letter-spacing:1px;margin-top:2px;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:11px 20px;cursor:pointer;transition:all 0.15s;border-radius:0;font-size:13px;font-weight:600;color:var(--txt2);border-left:3px solid transparent;}
+.nav-item:hover{background:rgba(255,255,255,0.04);color:var(--txt);}
+.nav-item.active{background:rgba(74,222,128,0.08);color:var(--accent);border-left-color:var(--accent);}
+.nav-icon{font-size:16px;width:20px;text-align:center;}
+.sidebar-footer{margin-top:auto;padding:16px 20px;border-top:1px solid var(--border);}
+.partner-info{font-size:12px;color:var(--txt2);margin-bottom:12px;}
+.partner-name{font-size:14px;font-weight:700;color:var(--txt);margin-bottom:2px;}
+.logout-btn{width:100%;padding:9px;background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.2);border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.logout-btn:hover{background:rgba(239,68,68,0.2);}
 
-/* ── STAT CARDS ── */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:1.5rem;}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;}
-.stat-val{font-size:24px;font-weight:900;color:var(--txt);margin-bottom:4px;}
-.stat-lbl{font-size:11px;color:var(--txt2);font-weight:600;text-transform:uppercase;letter-spacing:0.5px;}
+/* Main content */
+.main-content{margin-left:220px;min-height:100vh;}
+
+/* Topbar */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;border-bottom:1px solid var(--border);background:var(--card);position:sticky;top:0;z-index:50;}
+.topbar-title{font-size:18px;font-weight:800;color:#fff;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.refresh-btn{display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(74,222,128,0.1);color:var(--accent);border:1px solid rgba(74,222,128,0.25);border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.refresh-btn:hover{background:rgba(74,222,128,0.2);}
+.last-update{font-size:11px;color:var(--txt2);}
+.online-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;box-shadow:0 0 8px var(--accent);animation:pulse-dot 2s ease infinite;}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* Pages */
+.page{display:none;padding:28px;}
+.page.active{display:block;}
+
+/* Stat cards */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;position:relative;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;}
+.stat-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.3);}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.stat-card.green::before{background:linear-gradient(90deg,var(--accent),transparent);}
+.stat-card.yellow::before{background:linear-gradient(90deg,var(--accent2),transparent);}
+.stat-card.blue::before{background:linear-gradient(90deg,var(--blue),transparent);}
+.stat-card.purple::before{background:linear-gradient(90deg,var(--purple),transparent);}
+.stat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px;}
+.stat-card.green .stat-icon{background:rgba(74,222,128,0.1);}
+.stat-card.yellow .stat-icon{background:rgba(246,201,0,0.1);}
+.stat-card.blue .stat-icon{background:rgba(59,130,246,0.1);}
+.stat-card.purple .stat-icon{background:rgba(168,85,247,0.1);}
+.stat-label{font-size:11px;color:var(--txt2);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.stat-val{font-size:22px;font-weight:900;color:#fff;}
 .stat-card.green .stat-val{color:var(--accent);}
 .stat-card.yellow .stat-val{color:var(--accent2);}
-.stat-card.blue .stat-val{color:var(--blue);}
-.stat-card.red .stat-val{color:var(--red);}
+.stat-sub{font-size:11px;color:var(--txt2);margin-top:4px;}
 
-/* ── PROMO CODE BOX ── */
-.promo-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;}
-.section-title{font-size:14px;font-weight:800;color:var(--txt);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.promo-code-display{background:var(--bg);border:2px dashed var(--accent);border-radius:12px;padding:18px;text-align:center;margin-bottom:14px;}
-.promo-code-val{font-size:32px;font-weight:900;color:var(--accent);letter-spacing:6px;font-family:monospace;margin-bottom:8px;}
-.promo-code-sub{font-size:12px;color:var(--txt2);}
-.copy-btn{padding:10px 24px;background:var(--accent);color:#000;border:none;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;transition:opacity 0.2s;}
+/* Charts row */
+.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.card-badge{font-size:9px;padding:2px 8px;border-radius:10px;font-weight:800;letter-spacing:0.5px;}
+.badge-green{background:rgba(74,222,128,0.1);color:var(--accent);}
+.badge-yellow{background:rgba(246,201,0,0.1);color:var(--accent2);}
+
+/* Commission breakdown */
+.comm-breakdown{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:24px;}
+.comm-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.comm-row:last-child{border-bottom:none;}
+.comm-row-label{font-size:13px;color:var(--txt2);}
+.comm-row-val{font-size:14px;font-weight:800;}
+
+/* Promo box */
+.promo-box{background:linear-gradient(135deg,rgba(74,222,128,0.08),rgba(74,222,128,0.03));border:1px solid rgba(74,222,128,0.2);border-radius:16px;padding:20px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.promo-left .promo-label{font-size:11px;color:var(--txt2);font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.promo-code{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;}
+.promo-sub{font-size:11px;color:var(--txt2);margin-top:4px;}
+.copy-btn{padding:10px 20px;background:var(--accent);color:#000;border:none;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap;transition:opacity 0.15s;}
 .copy-btn:hover{opacity:0.85;}
-.promo-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;}
-.promo-stat{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;}
-.promo-stat-val{font-size:16px;font-weight:800;color:var(--txt);}
-.promo-stat-lbl{font-size:10px;color:var(--txt2);margin-top:2px;}
 
-/* ── PLAYERS TABLE ── */
-.section-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;}
-.player-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border2);}
-.player-row:last-child{border-bottom:none;}
-.player-name{font-size:13px;font-weight:700;color:var(--txt);}
-.player-meta{font-size:11px;color:var(--txt2);margin-top:2px;}
-.player-dep{font-size:13px;font-weight:800;color:var(--accent);}
+/* Player list */
+.player-list{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.list-header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);}
+.player-item{display:grid;grid-template-columns:1fr auto auto auto;gap:16px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--border);transition:background 0.15s;}
+.player-item:last-child{border-bottom:none;}
+.player-item:hover{background:rgba(255,255,255,0.02);}
+.player-uname{font-size:13px;font-weight:700;color:var(--txt);}
+.player-date{font-size:11px;color:var(--txt2);margin-top:2px;}
+.player-cell{font-size:12px;font-weight:700;text-align:right;}
+.cell-label{font-size:10px;color:var(--txt2);font-weight:600;margin-bottom:2px;}
+.empty-state{padding:40px;text-align:center;color:var(--txt2);font-size:13px;}
 
-/* ── EARNINGS ── */
-.earn-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border2);}
-.earn-row:last-child{border-bottom:none;}
-.earn-type{font-size:12px;font-weight:700;color:var(--txt);}
-.earn-meta{font-size:11px;color:var(--txt2);margin-top:2px;}
-.earn-amt{font-size:14px;font-weight:900;}
-.earn-amt.green{color:var(--accent);}
-.earn-amt.yellow{color:var(--accent2);}
+/* Txn list */
+.txn-list{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.txn-item{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border);}
+.txn-item:last-child{border-bottom:none;}
+.txn-game{font-size:12px;font-weight:700;color:var(--txt);}
+.txn-time{font-size:10px;color:var(--txt2);margin-top:2px;}
+.txn-amt{font-size:13px;font-weight:800;}
+.txn-comm{font-size:10px;color:var(--accent);margin-top:2px;text-align:right;}
 
-/* ── WITHDRAWAL ── */
-.wd-info{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:12px;color:var(--txt2);line-height:1.6;}
-.wd-info strong{color:var(--txt);}
-.wd-pending{background:rgba(246,201,0,0.08);border:1px solid rgba(246,201,0,0.25);border-radius:10px;padding:12px 14px;font-size:12px;color:var(--accent2);}
+/* Withdrawal */
+.wd-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:16px;}
+.wd-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:16px;}
+.wd-balance{font-size:32px;font-weight:900;color:var(--accent2);margin-bottom:4px;}
+.wd-sub{font-size:12px;color:var(--txt2);margin-bottom:20px;}
+.wd-input{width:100%;padding:12px 14px;background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;color:var(--txt);font-size:16px;font-weight:700;outline:none;margin-bottom:10px;}
+.wd-input:focus{border-color:var(--accent2);}
+.wd-btn{width:100%;padding:13px;background:linear-gradient(135deg,#f6c90e,#e6b800);color:#000;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;transition:opacity 0.15s;}
+.wd-btn:hover{opacity:0.9;}
+.wd-err{background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:8px 12px;font-size:12px;display:none;margin-top:8px;}
+.wd-ok{background:rgba(74,222,128,0.1);color:var(--accent);border:1px solid rgba(74,222,128,0.2);border-radius:8px;padding:8px 12px;font-size:12px;display:none;margin-top:8px;}
+.wd-history{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.wd-hist-item{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid var(--border);}
+.wd-hist-item:last-child{border-bottom:none;}
+.wd-status{font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;}
+.status-pending{background:rgba(246,201,0,0.1);color:var(--accent2);}
+.status-paid{background:rgba(74,222,128,0.1);color:var(--accent);}
+.status-rejected{background:rgba(239,68,68,0.1);color:var(--red);}
 
-/* ── COMMISSION BADGE ── */
-.comm-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(246,201,0,0.1);border:1px solid rgba(246,201,0,0.3);border-radius:20px;padding:4px 14px;font-size:13px;color:var(--accent2);font-weight:800;}
+/* Mini bar chart */
+.bar-chart{display:flex;align-items:flex-end;gap:4px;height:60px;}
+.bar{flex:1;border-radius:4px 4px 0 0;min-height:4px;transition:height 0.4s ease;}
+.bar-loss{background:rgba(239,68,68,0.6);}
+.bar-win{background:rgba(74,222,128,0.6);}
 
-/* ── EMPTY ── */
-.empty{text-align:center;padding:2rem;color:var(--txt2);font-size:13px;}
-
-/* ── TABS ── */
-.tabs{display:flex;gap:4px;background:var(--bg);border-radius:12px;padding:4px;margin-bottom:1.5rem;}
-.tab{flex:1;padding:10px;border:none;background:transparent;color:var(--txt2);font-size:13px;font-weight:700;cursor:pointer;border-radius:8px;transition:all 0.2s;}
-.tab.active{background:var(--card);color:var(--txt);border:1px solid var(--border);}
-
-/* ── LOADING ── */
-.spinner{display:flex;align-items:center;justify-content:center;padding:2rem;color:var(--txt2);font-size:13px;}
+/* Mobile */
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);transition:transform 0.25s;}
+  .sidebar.open{transform:translateX(0);}
+  .main-content{margin-left:0;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .charts-row{grid-template-columns:1fr;}
+  .player-item{grid-template-columns:1fr auto;}
+  .mobile-menu-btn{display:flex!important;}
+  .promo-box{flex-direction:column;text-align:center;}
+}
+.mobile-menu-btn{display:none;align-items:center;justify-content:center;width:36px;height:36px;background:var(--card2);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:18px;}
+.overlay-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99;}
+.overlay-bg.show{display:block;}
 </style>
 </head>
 <body>
 
-<!-- AUTH -->
+<!-- AUTH PAGE -->
 <div id="p-auth">
   <div class="auth-box">
-    <div class="auth-logo">2x<span>Win</span></div>
-    <div class="auth-sub">Partner Panel</div>
-    <div class="auth-badge">🤝 Affiliate Login</div>
-    <div class="af"><label>Username</label><input type="text" id="aff-user" placeholder="Your partner username"/></div>
-    <div class="af"><label>Password</label><input type="password" id="aff-pass" placeholder="Your password"/></div>
-    <div class="aerr" id="aff-err"></div>
-    <button class="auth-btn" id="aff-login-btn">Login to Partner Panel</button>
+    <div class="auth-logo">
+      <div class="auth-logo-text">2x<span>Win</span></div>
+      <div class="auth-badge">PARTNER PORTAL</div>
+    </div>
+    <div class="auth-title">Welcome back</div>
+    <div class="auth-sub">Sign in to your partner account</div>
+    <div class="auth-field">
+      <label>Username</label>
+      <input type="text" id="aff-user" placeholder="Enter username" autocomplete="off"/>
+    </div>
+    <div class="auth-field">
+      <label>Password</label>
+      <input type="password" id="aff-pass" placeholder="Enter password"/>
+    </div>
+    <button class="auth-btn" id="aff-login-btn" onclick="doAffLogin()">Sign In</button>
+    <div class="auth-err" id="aff-err"></div>
   </div>
 </div>
 
-<!-- MAIN PANEL -->
+<!-- MAIN APP -->
 <div id="p-main">
-  <!-- Header -->
-  <div class="aff-header">
-    <div style="display:flex;align-items:center;gap:12px;">
-      <div class="aff-logo">2x<span>Win</span></div>
-      <div class="aff-badge">Partner</div>
+  <div class="overlay-bg" id="overlay-bg" onclick="closeSidebar()"></div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-text">2x<span>Win</span></div>
+      <div class="sidebar-badge">PARTNER PANEL</div>
     </div>
-    <div class="aff-user">
-      <div class="aff-username" id="aff-display-name"></div>
-      <button class="logout-btn" id="aff-logout">Logout</button>
+    <div class="nav-item active" onclick="showPage('pg-overview')">
+      <span class="nav-icon">📊</span> Overview
+    </div>
+    <div class="nav-item" onclick="showPage('pg-players')">
+      <span class="nav-icon">👥</span> My Players
+    </div>
+    <div class="nav-item" onclick="showPage('pg-earnings')">
+      <span class="nav-icon">💰</span> Earnings
+    </div>
+    <div class="nav-item" onclick="showPage('pg-withdraw')">
+      <span class="nav-icon">🏦</span> Withdraw
+    </div>
+    <div class="nav-item" onclick="showPage('pg-promo')">
+      <span class="nav-icon">🔗</span> Promo Code
+    </div>
+    <div class="sidebar-footer">
+      <div class="partner-info">
+        <div class="partner-name" id="sb-partner-name">Partner</div>
+        <div id="sb-partner-code" style="font-size:11px;color:var(--accent);"></div>
+      </div>
+      <button class="logout-btn" id="aff-logout">🚪 Sign Out</button>
     </div>
   </div>
 
-  <div class="aff-wrap">
-
-    <!-- Stats -->
-    <div class="stats-grid" id="aff-stats">
-      <div class="stat-card blue"><div class="stat-val" id="st-players">0</div><div class="stat-lbl">Total Players</div></div>
-      <div class="stat-card green"><div class="stat-val" id="st-deposits">Rs. 0</div><div class="stat-lbl">Total Deposits</div></div>
-      <div class="stat-card yellow"><div class="stat-val" id="st-earned">Rs. 0</div><div class="stat-lbl">Total Earned</div></div>
-      <div class="stat-card red"><div class="stat-val" id="st-pending">Rs. 0</div><div class="stat-lbl">Pending Payout</div></div>
-    </div>
-
-    <!-- Promo Code -->
-    <div class="promo-box">
-      <div class="section-title">🎟️ Your Promo Code</div>
-      <div class="promo-code-display">
-        <div class="promo-code-val" id="aff-code">——</div>
-        <div class="promo-code-sub">Share this code with players to earn commission</div>
-      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px;">
-        <div id="last-refresh" style="font-size:10px;color:var(--txt2);">Auto-refreshes every 30s</div>
-        <button onclick="loadAffStats();document.getElementById('last-refresh').textContent='Updated: '+new Date().toLocaleTimeString();" style="padding:4px 12px;background:rgba(74,222,128,0.1);color:var(--accent);border:1px solid rgba(74,222,128,0.3);border-radius:20px;font-size:10px;font-weight:700;cursor:pointer;">↻ Refresh Now</button>
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Topbar -->
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="mobile-menu-btn" onclick="openSidebar()">☰</div>
+        <div class="topbar-title" id="page-title">Overview</div>
       </div>
-      </div>
-      <div style="text-align:center;margin-bottom:14px;">
-        <button class="copy-btn" id="copy-code-btn">📋 Copy Code</button>
-      </div>
-      <div class="promo-stats">
-        <div class="promo-stat"><div class="promo-stat-val" id="ps-uses">0</div><div class="promo-stat-lbl">Times Used</div></div>
-        <div class="promo-stat"><div class="promo-stat-val" id="ps-comm">0%</div><div class="promo-stat-lbl">Commission Rate</div></div>
-        <div class="promo-stat"><div class="promo-stat-val" id="ps-next">Sat</div><div class="promo-stat-lbl">Next Payout</div></div>
+      <div class="topbar-right">
+        <div class="online-dot"></div>
+        <div class="last-update" id="last-refresh">Loading...</div>
+        <button class="refresh-btn" onclick="loadAffStats();document.getElementById('last-refresh').textContent='Updated: '+new Date().toLocaleTimeString();">
+          ↻ Refresh
+        </button>
       </div>
     </div>
 
-    <!-- Tabs -->
-    <div class="tabs">
-      <button class="tab active" id="tab-players" onclick="showTab('players')">👥 My Players</button>
-      <button class="tab" id="tab-earnings" onclick="showTab('earnings')">💰 Earnings</button>
-      <button class="tab" id="tab-wd" onclick="showTab('wd')">💸 Withdrawals</button>
+    <!-- OVERVIEW PAGE -->
+    <div class="page active" id="pg-overview">
+      <!-- Stat Cards -->
+      <div class="stats-grid">
+        <div class="stat-card green">
+          <div class="stat-icon">👥</div>
+          <div class="stat-label">Total Players</div>
+          <div class="stat-val" id="st-players">—</div>
+          <div class="stat-sub">Used your promo code</div>
+        </div>
+        <div class="stat-card blue">
+          <div class="stat-icon">💳</div>
+          <div class="stat-label">Total Deposits</div>
+          <div class="stat-val" id="st-deposits">—</div>
+          <div class="stat-sub">Approved deposits</div>
+        </div>
+        <div class="stat-card yellow">
+          <div class="stat-icon">💰</div>
+          <div class="stat-label">Total Earned</div>
+          <div class="stat-val" id="st-earned">—</div>
+          <div class="stat-sub">Lifetime commission</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-icon">🏦</div>
+          <div class="stat-label">Pending Payout</div>
+          <div class="stat-val" id="st-pending">—</div>
+          <div class="stat-sub">Available to withdraw</div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="charts-row">
+        <div class="chart-card">
+          <div class="card-title">
+            📈 Commission Rate
+            <span class="card-badge badge-green">ACTIVE</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:20px;margin-bottom:16px;">
+            <div>
+              <div style="font-size:32px;font-weight:900;color:var(--accent);" id="comm-rate-display">25%</div>
+              <div style="font-size:11px;color:var(--txt2);">of player losses</div>
+            </div>
+            <div style="flex:1;height:1px;background:var(--border);"></div>
+            <div style="text-align:right;">
+              <div style="font-size:18px;font-weight:900;color:var(--red);">-30%</div>
+              <div style="font-size:11px;color:var(--txt2);">of player wins</div>
+            </div>
+          </div>
+          <div style="background:var(--bg);border-radius:10px;padding:12px;font-size:12px;color:var(--txt2);line-height:1.6;">
+            Formula: <span style="color:var(--accent);font-weight:700;">25% × losses</span> minus <span style="color:var(--red);font-weight:700;">30% × wins</span>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="card-title">
+            📊 Player Activity
+            <span class="card-badge badge-yellow">LIVE</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <div style="background:var(--bg);border-radius:10px;padding:12px;text-align:center;">
+              <div style="font-size:20px;font-weight:900;color:var(--red);" id="ov-total-lost">—</div>
+              <div style="font-size:10px;color:var(--txt2);margin-top:2px;">Player Losses</div>
+            </div>
+            <div style="background:var(--bg);border-radius:10px;padding:12px;text-align:center;">
+              <div style="font-size:20px;font-weight:900;color:var(--accent);" id="ov-total-won">—</div>
+              <div style="font-size:10px;color:var(--txt2);margin-top:2px;">Player Wins</div>
+            </div>
+          </div>
+          <div class="bar-chart" id="activity-bars">
+            <!-- filled by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Commission Breakdown -->
+      <div class="comm-breakdown">
+        <div class="card-title">💎 Commission Breakdown</div>
+        <div class="comm-row">
+          <div class="comm-row-label">Total player losses</div>
+          <div class="comm-row-val" style="color:var(--red);" id="br-losses">—</div>
+        </div>
+        <div class="comm-row">
+          <div class="comm-row-label">Your 25% of losses</div>
+          <div class="comm-row-val" style="color:var(--accent);" id="br-25pct">—</div>
+        </div>
+        <div class="comm-row">
+          <div class="comm-row-label">Total player wins</div>
+          <div class="comm-row-val" style="color:var(--accent);" id="br-wins">—</div>
+        </div>
+        <div class="comm-row">
+          <div class="comm-row-label">Minus 30% of wins</div>
+          <div class="comm-row-val" style="color:var(--red);" id="br-30pct">—</div>
+        </div>
+        <div class="comm-row" style="background:rgba(246,201,0,0.04);border-radius:8px;padding:12px;margin-top:8px;">
+          <div class="comm-row-label" style="color:#fff;font-weight:800;font-size:14px;">Net Commission</div>
+          <div class="comm-row-val" style="color:var(--accent2);font-size:20px;" id="br-net">—</div>
+        </div>
+      </div>
     </div>
 
-    <!-- Players Tab -->
-    <div class="section-box" id="tab-players-pane">
-      <div class="section-title">👥 Players Who Used Your Code</div>
-      <div id="aff-players-list"><div class="spinner">Loading...</div></div>
+    <!-- PLAYERS PAGE -->
+    <div class="page" id="pg-players">
+      <div class="player-list">
+        <div class="list-header">
+          <div class="card-title" style="margin:0;">👥 My Players</div>
+          <div style="font-size:12px;color:var(--txt2);" id="players-count">0 players</div>
+        </div>
+        <div id="players-table">
+          <div class="empty-state">Loading players...</div>
+        </div>
+      </div>
     </div>
 
-    <!-- Earnings Tab -->
-    <div class="section-box" id="tab-earnings-pane" style="display:none;">
-      <div class="section-title">💰 Earning History</div>
-      <div id="aff-earnings-list"><div class="spinner">Loading...</div></div>
+    <!-- EARNINGS PAGE -->
+    <div class="page" id="pg-earnings">
+      <div class="txn-list">
+        <div class="list-header">
+          <div class="card-title" style="margin:0;">📋 Recent Game Transactions</div>
+          <div class="card-badge badge-green" style="padding:4px 10px;">LIVE</div>
+        </div>
+        <div id="earnings-table">
+          <div class="empty-state">Loading transactions...</div>
+        </div>
+      </div>
     </div>
 
-    <!-- Withdrawal Tab -->
-    <div class="section-box" id="tab-wd-pane" style="display:none;">
-      <div class="section-title">💸 Commission Withdrawal</div>
-      <div class="wd-info">
-        <strong>Auto Payout Every Saturday</strong><br/>
-        Your earned commission is automatically paid every Saturday.<br/>
-        Next payout: <strong id="next-sat-date">—</strong><br/>
-        Commission Rate: <span class="comm-badge" id="wd-comm-rate">0%</span>
+    <!-- WITHDRAW PAGE -->
+    <div class="page" id="pg-withdraw">
+      <div style="max-width:480px;">
+        <div class="wd-box">
+          <div class="wd-title">💳 Request Withdrawal</div>
+          <div style="font-size:11px;color:var(--txt2);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">Available Balance</div>
+          <div class="wd-balance" id="wd-balance">Rs. 0</div>
+          <div class="wd-sub">Minimum withdrawal: Rs. 5,000</div>
+          <input class="wd-input" type="number" id="wd-amt" placeholder="Enter amount (Rs.)"/>
+          <input class="wd-input" type="text" id="wd-wallet" placeholder="Your wallet/account details" style="font-size:13px;font-weight:400;"/>
+          <button class="wd-btn" onclick="requestWithdrawal()">Request Withdrawal</button>
+          <div class="wd-err" id="wd-err"></div>
+          <div class="wd-ok" id="wd-ok"></div>
+        </div>
+        <div class="wd-history">
+          <div class="list-header">
+            <div class="card-title" style="margin:0;">🕐 Withdrawal History</div>
+          </div>
+          <div id="wd-history-list">
+            <div class="empty-state">No withdrawals yet</div>
+          </div>
+        </div>
       </div>
-      <div style="margin-bottom:12px;">
-        <div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:8px;">Pending Payout</div>
-        <div style="font-size:28px;font-weight:900;color:var(--accent2);" id="wd-pending-amt">Rs. 0</div>
-      </div>
-      <div class="wd-info" style="margin-bottom:12px;">
-        <strong>Your Wallet:</strong> <span id="wd-wallet-info">Not set — contact admin</span>
-      </div>
-      <!-- Commission Formula -->
-      <div class="wd-info" style="margin-bottom:12px;border-color:rgba(74,222,128,0.25);">
-        <strong style="color:var(--accent);">Commission Formula:</strong><br/>
-        ✅ <strong>+25%</strong> of what your players <strong>lose</strong><br/>
-        ❌ <strong>−30%</strong> of what your players <strong>win</strong><br/>
-        <span style="color:var(--txt2);font-size:11px;">Minimum withdrawal: <strong>Rs. 5,000</strong> or <strong>$30 USD</strong></span>
-      </div>
-      <div id="aff-wd-history" style="margin-top:14px;"></div>
     </div>
 
-  </div>
-</div>
+    <!-- PROMO PAGE -->
+    <div class="page" id="pg-promo">
+      <div style="max-width:560px;">
+        <div class="promo-box" style="flex-direction:column;align-items:flex-start;gap:20px;">
+          <div>
+            <div class="card-title" style="margin-bottom:8px;">🔗 Your Promo Code</div>
+            <div style="font-size:13px;color:var(--txt2);margin-bottom:16px;">Share this code with players. When they register and play, you earn commission automatically.</div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="background:var(--bg);border:2px solid var(--accent);border-radius:12px;padding:14px 24px;">
+                <div class="promo-code" id="promo-code-display">—</div>
+              </div>
+              <button class="copy-btn" id="copy-code-btn">📋 Copy</button>
+            </div>
+          </div>
+          <div style="width:100%;height:1px;background:var(--border);"></div>
+          <div style="width:100%;">
+            <div class="card-title" style="margin-bottom:12px;">📤 Share Link</div>
+            <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+              <div style="font-size:12px;color:var(--txt2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" id="share-link">—</div>
+              <button onclick="copyShareLink()" style="padding:6px 12px;background:var(--card2);color:var(--txt);border:1px solid var(--border);border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;">Copy Link</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;">
+          <div class="card-title" style="margin-bottom:16px;">ℹ️ How Commission Works</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div style="width:32px;height:32px;background:rgba(74,222,128,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+              <div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:2px;">Player registers with your code</div><div style="font-size:12px;color:var(--txt2);">They enter your promo code during signup</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div style="width:32px;height:32px;background:rgba(59,130,246,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+              <div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:2px;">Player plays games</div><div style="font-size:12px;color:var(--txt2);">Every game they play is tracked to your account</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div style="width:32px;height:32px;background:rgba(246,201,0,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+              <div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:2px;">You earn 25% of their losses</div><div style="font-size:12px;color:var(--txt2);">Minus 30% of their wins. Net = your commission</div></div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div style="width:32px;height:32px;background:rgba(168,85,247,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</div>
+              <div><div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:2px;">Request payout anytime</div><div style="font-size:12px;color:var(--txt2);">Minimum Rs. 5,000. Paid within 24 hours</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end main-content -->
+</div><!-- end p-main -->
 
 <script>
-var FB = 'https://topcasinos-b75b3-default-rtdb.asia-southeast1.firebasedatabase.app';
-var affData = null, affKey = null;
+var FB='https://topcasinos-b75b3-default-rtdb.asia-southeast1.firebasedatabase.app';
+var affData=null,affKey=null,gState={};
 
-function fbGet(p){return fetch(FB+p+'.json').then(function(r){return r.json();});}
-function fbUpdate(p,d){return fetch(FB+p+'.json',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).then(function(r){return r.json();});}
+function $(id){return document.getElementById(id);}
+function fmt(n){return 'Rs. '+Number(n||0).toLocaleString('en-NP');}
+function fmtShort(n){n=Number(n||0);if(n>=100000)return 'Rs. '+(n/100000).toFixed(1)+'L';if(n>=1000)return 'Rs. '+(n/1000).toFixed(1)+'K';return 'Rs. '+n.toLocaleString('en-NP');}
+function maskUsername(u){if(!u)return 'Player';return u.slice(0,2)+'***'+u.slice(-1);}
+function aerr(id,msg){var el=$(id);if(el){el.textContent=msg;el.style.display=msg?'block':'none';}}
+function setText(id,t){var el=$(id);if(el)el.textContent=t;}
+
+function fbGet(p){return fetch(FB+p+'.json').then(function(r){if(!r.ok)throw new Error(r.status);return r.json();});}
 function fbPush(p,d){return fetch(FB+p+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).then(function(r){return r.json();});}
-function fmt(n){return 'Rs. '+(Number(n)||0).toLocaleString('en-NP');}
+function fbUpdate(p,d){return fetch(FB+p+'.json',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).then(function(r){return r.json();});}
 
-function nextSaturday(){
-  var d=new Date();
-  var day=d.getDay(); // 0=Sun,6=Sat
-  var diff=(6-day+7)%7||7;
-  d.setDate(d.getDate()+diff);
-  return d.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});
+// ── NAVIGATION ──
+function showPage(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
+  var pg=$(id);if(pg)pg.classList.add('active');
+  var titles={'pg-overview':'Overview','pg-players':'My Players','pg-earnings':'Earnings','pg-withdraw':'Withdraw','pg-promo':'Promo Code'};
+  setText('page-title',titles[id]||'');
+  // Mark nav active
+  var navMap={'pg-overview':0,'pg-players':1,'pg-earnings':2,'pg-withdraw':3,'pg-promo':4};
+  var navItems=document.querySelectorAll('.nav-item');
+  if(navMap[id]!==undefined&&navItems[navMap[id]])navItems[navMap[id]].classList.add('active');
+  closeSidebar();
 }
+function openSidebar(){$('sidebar').classList.add('open');$('overlay-bg').classList.add('show');}
+function closeSidebar(){$('sidebar').classList.remove('open');$('overlay-bg').classList.remove('show');}
 
-// ── LOGIN ──
-document.getElementById('aff-login-btn').onclick = function(){
-  var user=(document.getElementById('aff-user').value||'').trim();
-  var pass=(document.getElementById('aff-pass').value||'').trim();
-  var err=document.getElementById('aff-err');
-  err.style.display='none';
-  if(!user||!pass){err.textContent='Enter username and password.';err.style.display='block';return;}
-  var btn=document.getElementById('aff-login-btn');
-  btn.textContent='Logging in...';btn.disabled=true;
-  fbGet('/affiliates').then(function(data){
-    if(!data){err.textContent='Invalid credentials.';err.style.display='block';btn.textContent='Login to Partner Panel';btn.disabled=false;return;}
-    var found=null, foundKey=null;
-    Object.entries(data).forEach(function(e){
-      if((e[1].username||'').toLowerCase()===user.toLowerCase()&&e[1].password===pass){
-        found=e[1]; foundKey=e[0];
+// ── AUTH ──
+function doAffLogin(){
+  var u=($('aff-user').value||'').trim().toLowerCase();
+  var p=$('aff-pass').value||'';
+  if(!u||!p){aerr('aff-err','Fill all fields.');return;}
+  var btn=$('aff-login-btn');
+  btn.textContent='Signing in...';btn.disabled=true;
+  aerr('aff-err','');
+  fbGet('/affiliates').then(function(affs){
+    btn.textContent='Sign In';btn.disabled=false;
+    if(!affs){aerr('aff-err','Invalid credentials.');return;}
+    var found=null,fk=null;
+    Object.entries(affs).forEach(function(e){
+      if(e[1].username&&e[1].username.toLowerCase()===u&&e[1].password===p){
+        found=e[1];fk=e[0];
       }
     });
-    if(!found){err.textContent='Invalid username or password.';err.style.display='block';btn.textContent='Login to Partner Panel';btn.disabled=false;return;}
-    if(found.disabled){err.textContent='This account has been disabled. Contact admin.';err.style.display='block';btn.textContent='Login to Partner Panel';btn.disabled=false;return;}
-    affData=found; affKey=foundKey;
-    sessionStorage.setItem('aff_key',foundKey);
-    sessionStorage.setItem('aff_data',JSON.stringify(found));
-    loadPanel();
-  }).catch(function(e){err.textContent='Error: '+e.message;err.style.display='block';btn.textContent='Login to Partner Panel';btn.disabled=false;});
-};
+    if(!found){aerr('aff-err','Invalid username or password.');return;}
+    affData=found;affKey=fk;
+    startAffSession();
+  }).catch(function(e){
+    btn.textContent='Sign In';btn.disabled=false;
+    aerr('aff-err','Error: '+e.message);
+  });
+}
 
-document.getElementById('aff-pass').onkeydown=function(e){if(e.key==='Enter')document.getElementById('aff-login-btn').click();};
-
-// ── LOGOUT ──
-document.getElementById('aff-logout').onclick=function(){
-  sessionStorage.clear();
-  affData=null;affKey=null;
-  if(window._affRefreshTimer){clearInterval(window._affRefreshTimer);window._affRefreshTimer=null;}
-  document.getElementById('p-main').style.display='none';
-  document.getElementById('p-auth').style.display='flex';
-};
-
-// ── LOAD PANEL ──
-function loadPanel(){
-  document.getElementById('p-auth').style.display='none';
-  document.getElementById('p-main').style.display='block';
-  document.getElementById('aff-display-name').textContent=affData.username||'Partner';
-  document.getElementById('aff-code').textContent=affData.promoCode||'—';
-  document.getElementById('ps-comm').textContent=(affData.commissionRate||0)+'%';
-  document.getElementById('wd-comm-rate').textContent=(affData.commissionRate||0)+'%';
-  document.getElementById('next-sat-date').textContent=nextSaturday();
-  document.getElementById('ps-next').textContent='Saturday';
-  document.getElementById('wd-wallet-info').textContent=affData.walletInfo||'Not set — contact admin';
-  document.getElementById('copy-code-btn').onclick=function(){
+function startAffSession(){
+  $('p-auth').style.display='none';
+  $('p-main').style.display='block';
+  setText('sb-partner-name',affData.name||affData.username||'Partner');
+  setText('sb-partner-code',affData.promoCode||'');
+  setText('comm-rate-display',(affData.commissionRate||25)+'%');
+  // Promo page
+  setText('promo-code-display',affData.promoCode||'N/A');
+  var shareLink='topcasinosweltwiet.github.io/mplayer/?ref='+(affData.promoCode||'');
+  setText('share-link',shareLink);
+  // Copy code btn
+  $('copy-code-btn').onclick=function(){
     navigator.clipboard.writeText(affData.promoCode||'').then(function(){
-      document.getElementById('copy-code-btn').textContent='✓ Copied!';
-      setTimeout(function(){document.getElementById('copy-code-btn').textContent='📋 Copy Code';},2000);
+      $('copy-code-btn').textContent='✓ Copied!';
+      setTimeout(function(){$('copy-code-btn').textContent='📋 Copy';},2000);
     });
   };
   loadAffStats();
   // Auto-refresh every 30 seconds
-  if(window._affRefreshTimer) clearInterval(window._affRefreshTimer);
-  window._affRefreshTimer = setInterval(function(){
+  if(window._affTimer)clearInterval(window._affTimer);
+  window._affTimer=setInterval(function(){
     loadAffStats();
-    // Update last refreshed time
-    var el=document.getElementById('last-refresh');
-    if(el) el.textContent='Last updated: '+new Date().toLocaleTimeString();
-  }, 30000);
+  },30000);
+}
+
+function copyShareLink(){
+  var l=($('share-link')||{}).textContent||'';
+  navigator.clipboard.writeText(l).then(function(){alert('Link copied!');});
 }
 
 // ── LOAD STATS ──
 function loadAffStats(){
+  if(!affData)return;
   var code=affData.promoCode||'';
-  var commRate=(affData.commissionRate||0)/100;
-  // Show loading pulse on stat cards
-  ['st-players','st-deposits','st-earned','st-pending'].forEach(function(id){
-    var el=document.getElementById(id);
-    if(el)el.style.opacity='0.5';
+  // Fade stat cards
+  ['st-players','st-deposits','st-earned','st-pending','ov-total-lost','ov-total-won'].forEach(function(id){
+    var el=$(id);if(el)el.style.opacity='0.4';
   });
   Promise.all([
     fbGet('/players'),
     fbGet('/playerCryptoDeposits'),
-    fbGet('/affiliateEarnings/'+affKey),
+    fbGet('/gameTxns'),
     fbGet('/affiliateWithdrawals/'+affKey)
   ]).then(function(res){
-    var players=res[0]||{}, deps=res[1]||{}, earnings=res[2]||{}, wds=res[3]||{};
-    // Find players who used this promo code
-    var myPlayers=Object.entries(players).filter(function(e){return e[1].promoCode===code;});
-    var myPlayerKeys=myPlayers.map(function(e){return e[0];});
-    // Calculate total deposits from my players
+    var players=res[0]||{};
+    var deps=res[1]||{};
+    var txns=res[2]||{};
+    var wds=res[3]||{};
+
+    // My players = used this promo code
+    var myPlayers=Object.entries(players).filter(function(e){
+      return e[1].promoCode&&e[1].promoCode===code;
+    });
+    var myKeys=myPlayers.map(function(e){return e[0];});
+
+    // Deposits
     var totalDep=0;
     var myDeps=Object.values(deps).filter(function(d){
-      return myPlayerKeys.indexOf(d.playerKey)>=0 && d.status==='approved';
+      return myKeys.indexOf(d.playerKey)>=0&&d.status==='approved';
     });
     myDeps.forEach(function(d){totalDep+=(d.creditedAmount||0);});
-    // Total earned
-    var totalEarned=0, pendingPayout=0;
-    if(Object.keys(earnings).length){
-      Object.values(earnings).forEach(function(e){
-        totalEarned+=(e.amount||0);
-        if(e.status==='pending')pendingPayout+=(e.amount||0);
-      });
-    } else {
-      // Calculate: 25% of losses - 30% of wins
-      totalEarned=Math.max(0,Math.floor(totalLost*0.25)-Math.floor(totalWon*0.30));
-      pendingPayout=totalEarned;
-    }
-    // Subtract paid withdrawals
+
+    // Game txns
+    var totalWon=0,totalLost=0,myTxns=[];
+    Object.values(txns).forEach(function(t){
+      var mine=myKeys.indexOf(t.playerKey)>=0||(t.promoCode&&t.promoCode===code);
+      if(mine){
+        myTxns.push(t);
+        if(t.type==='win') totalWon+=(t.amount||0);
+        else if(t.type==='loss') totalLost+=(t.amount||0);
+      }
+    });
+
+    // Commission
+    var earn25=Math.floor(totalLost*0.25);
+    var minus30=Math.floor(totalWon*0.30);
+    var totalEarned=Math.max(0,earn25-minus30);
+    var pendingPayout=totalEarned;
     Object.values(wds).forEach(function(w){
       if(w.status==='paid')pendingPayout-=(w.amount||0);
     });
     pendingPayout=Math.max(0,pendingPayout);
-    // Update stats
-    document.getElementById('st-players').textContent=myPlayers.length;
-    document.getElementById('st-deposits').textContent=fmt(totalDep);
-    document.getElementById('st-earned').textContent=fmt(totalEarned);
-    document.getElementById('st-pending').textContent=fmt(pendingPayout);
-    document.getElementById('ps-uses').textContent=myPlayers.length;
-    document.getElementById('wd-pending-amt').textContent=fmt(pendingPayout);
+
+    // Store
+    gState={myPlayers:myPlayers,myKeys:myKeys,deps:deps,myDeps:myDeps,txns:txns,myTxns:myTxns,
+      totalWon:totalWon,totalLost:totalLost,totalDep:totalDep,
+      earn25:earn25,minus30:minus30,totalEarned:totalEarned,pendingPayout:pendingPayout,wds:wds};
+
+    // Update cards
+    setText('st-players',myPlayers.length);
+    setText('st-deposits',fmtShort(totalDep));
+    setText('st-earned',fmtShort(totalEarned));
+    setText('st-pending',fmtShort(pendingPayout));
+    setText('ov-total-lost',fmtShort(totalLost));
+    setText('ov-total-won',fmtShort(totalWon));
+    setText('wd-balance',fmt(pendingPayout));
+    setText('wd-pending-amt',fmt(pendingPayout));
+
+    // Breakdown
+    setText('br-losses',fmt(totalLost));
+    setText('br-25pct','+'+fmt(earn25));
+    setText('br-wins',fmt(totalWon));
+    setText('br-30pct','-'+fmt(minus30));
+    setText('br-net',fmt(totalEarned));
+
+    // Activity bar chart
+    renderActivityBars(myTxns);
+
     // Restore opacity
-    ['st-players','st-deposits','st-earned','st-pending'].forEach(function(id){
-      var el=document.getElementById(id);
-      if(el)el.style.opacity='1';
+    ['st-players','st-deposits','st-earned','st-pending','ov-total-lost','ov-total-won'].forEach(function(id){
+      var el=$(id);if(el)el.style.opacity='1';
     });
-    // Render players list
-    gState._txnsData=txns;
-    renderPlayers(myPlayers, deps, myPlayerKeys, commRate);
-    // Render earnings
-    renderEarnings(myDeps, commRate, txns, myPlayerKeys);
-    // Render withdrawals
-    renderWithdrawals(wds, pendingPayout);
-  }).catch(function(e){console.error(e);});
+
+    // Update time
+    setText('last-refresh','Updated: '+new Date().toLocaleTimeString());
+
+    // Render other pages
+    renderPlayers(myPlayers,deps,myKeys,txns);
+    renderEarnings(myTxns,totalLost,totalWon,earn25,minus30,totalEarned);
+    renderWithdrawals(wds,pendingPayout);
+
+  }).catch(function(err){
+    console.error('Affiliate error:',err);
+    setText('last-refresh','Error loading data');
+  });
 }
 
-function renderPlayers(myPlayers, deps, myPlayerKeys, commRate){
-  var wrap=document.getElementById('aff-players-list');
-  if(!myPlayers.length){wrap.innerHTML='<div class="empty">No players yet. Share your promo code!</div>';return;}
-  var txns=gState._txnsData||{};
-  var html=myPlayers.map(function(e){
+// ── RENDER ACTIVITY BARS ──
+function renderActivityBars(txns){
+  var wrap=$('activity-bars');if(!wrap)return;
+  // Group by day (last 7)
+  var days={};
+  txns.forEach(function(t){
+    var d=new Date(t.time||Date.now()).toLocaleDateString();
+    if(!days[d])days[d]={lost:0,won:0};
+    if(t.type==='loss')days[d].lost+=(t.amount||0);
+    else if(t.type==='win')days[d].won+=(t.amount||0);
+  });
+  var keys=Object.keys(days).slice(-7);
+  if(!keys.length){wrap.innerHTML='<div style="color:var(--txt2);font-size:11px;text-align:center;width:100%;">No activity yet</div>';return;}
+  var max=keys.reduce(function(m,k){return Math.max(m,days[k].lost,days[k].won);},1);
+  wrap.innerHTML=keys.map(function(k){
+    var lh=Math.max(4,Math.floor((days[k].lost/max)*56));
+    var wh=Math.max(4,Math.floor((days[k].won/max)*56));
+    return '<div style="display:flex;align-items:flex-end;gap:2px;flex:1;">'+
+      '<div class="bar bar-loss" style="height:'+lh+'px;flex:1;" title="Lost: '+fmt(days[k].lost)+'"></div>'+
+      '<div class="bar bar-win" style="height:'+wh+'px;flex:1;" title="Won: '+fmt(days[k].won)+'"></div>'+
+    '</div>';
+  }).join('');
+}
+
+// ── RENDER PLAYERS ──
+function renderPlayers(myPlayers,deps,myKeys,txns){
+  var wrap=$('players-table');if(!wrap)return;
+  setText('players-count',myPlayers.length+' player'+(myPlayers.length!==1?'s':''));
+  if(!myPlayers.length){wrap.innerHTML='<div class="empty-state">No players yet. Share your promo code!</div>';return;}
+  var rows=myPlayers.map(function(e){
     var key=e[0],pl=e[1];
-    var playerDeps=Object.values(deps||{}).filter(function(d){return d.playerKey===key&&d.status==='approved';});
-    var totalDep=playerDeps.reduce(function(s,d){return s+(d.creditedAmount||0);},0);
-    // Player game stats
-    var pWon=0,pLost=0;
-    Object.values(txns).forEach(function(t){
-      if(t.playerKey===key||(t.promoCode&&t.promoCode===code&&t.playerKey===key)){
-        if(t.type==='win')pWon+=(t.amount||0);
-        else if(t.type==='loss')pLost+=(t.amount||0);
-      }
+    var pDep=Object.values(deps||{}).filter(function(d){return d.playerKey===key&&d.status==='approved';});
+    var depTotal=pDep.reduce(function(s,d){return s+(d.creditedAmount||0);},0);
+    var pw=0,pl2=0;
+    Object.values(txns||{}).forEach(function(t){
+      if(t.playerKey===key){if(t.type==='win')pw+=(t.amount||0);else if(t.type==='loss')pl2+=(t.amount||0);}
     });
-    var myEarned=Math.max(0,Math.floor(pLost*0.25)-Math.floor(pWon*0.30));
-    return '<div class="player-row">'+
+    var comm=Math.max(0,Math.floor(pl2*0.25)-Math.floor(pw*0.30));
+    return '<div class="player-item">'+
       '<div>'+
-        '<div class="player-name">'+maskUsername(pl.username||'Player')+'</div>'+
-        '<div class="player-meta">Joined: '+new Date(pl.createdAt||Date.now()).toLocaleDateString()+' · '+playerDeps.length+' deposit(s)</div>'+
-        '<div style="font-size:10px;margin-top:3px;">'+
-          '<span style="color:#e74c3c;">Lost: '+fmt(pLost)+'</span> · '+
-          '<span style="color:#4ade80;">Won: '+fmt(pWon)+'</span>'+
-        '</div>'+
+        '<div class="player-uname">'+maskUsername(pl.username||'Player')+'</div>'+
+        '<div class="player-date">Joined '+new Date(pl.createdAt||Date.now()).toLocaleDateString()+'</div>'+
+      '</div>'+
+      '<div class="player-cell"><div class="cell-label">Deposits</div><div style="color:var(--blue);">'+fmtShort(depTotal)+'</div></div>'+
+      '<div class="player-cell"><div class="cell-label">Lost</div><div style="color:var(--red);">'+fmtShort(pl2)+'</div></div>'+
+      '<div class="player-cell"><div class="cell-label">Commission</div><div style="color:var(--accent);">+'+fmtShort(comm)+'</div></div>'+
+    '</div>';
+  }).join('');
+  wrap.innerHTML=rows;
+}
+
+// ── RENDER EARNINGS ──
+function renderEarnings(myTxns,totalLost,totalWon,earn25,minus30,totalEarned){
+  var wrap=$('earnings-table');if(!wrap)return;
+  var losses=myTxns.filter(function(t){return t.type==='loss';})
+    .sort(function(a,b){return new Date(b.time)-new Date(a.time);});
+  if(!losses.length){
+    wrap.innerHTML='<div class="empty-state">No game transactions yet.<br>Make sure Firebase gameTxns rule is set to ".read": true</div>';
+    return;
+  }
+  var rows=losses.slice(0,50).map(function(t){
+    var comm=Math.floor((t.amount||0)*0.25);
+    var gameLabel=(t.game||'Game').replace(/\d+$/,'').replace(/([A-Z])/g,' $1').trim();
+    return '<div class="txn-item">'+
+      '<div>'+
+        '<div class="txn-game">🎮 '+gameLabel+' — Player Lost</div>'+
+        '<div class="txn-time">'+new Date(t.time||Date.now()).toLocaleString()+'</div>'+
       '</div>'+
       '<div style="text-align:right;">'+
-        '<div class="player-dep">'+fmt(totalDep)+'</div>'+
-        '<div style="font-size:11px;color:var(--accent);margin-top:2px;">+'+fmt(myEarned)+' commission</div>'+
+        '<div class="txn-amt" style="color:var(--red);">-'+fmt(t.amount||0)+'</div>'+
+        '<div class="txn-comm">+'+fmt(comm)+' your share</div>'+
       '</div>'+
     '</div>';
   }).join('');
-  wrap.innerHTML=html;
+  wrap.innerHTML=rows;
 }
 
-function renderEarnings(myDeps, commRate, txns, myPlayerKeys){
-  var wrap=document.getElementById('aff-earnings-list');
-  txns=txns||{};
-  // Build earnings from game transactions
-  var myCode=affData&&affData.promoCode;
-  var gameLosses=Object.values(txns).filter(function(t){
-    var match=(t.promoCode&&t.promoCode===myCode)||myPlayerKeys.indexOf(t.playerKey)>=0;
-    return match&&t.type==='loss';
-  }).sort(function(a,b){return new Date(b.time)-new Date(a.time);});
-  var gameWins=Object.values(txns).filter(function(t){
-    var match=(t.promoCode&&t.promoCode===myCode)||myPlayerKeys.indexOf(t.playerKey)>=0;
-    return match&&t.type==='win';
-  });
-  var totalLostAmt=gameLosses.reduce(function(s,t){return s+(t.amount||0);},0);
-  var totalWonAmt=gameWins.reduce(function(s,t){return s+(t.amount||0);},0);
-  var net=Math.max(0,Math.floor(totalLostAmt*0.25)-Math.floor(totalWonAmt*0.30));
-  
-  var html='<div style="background:var(--bg);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12px;">'+
-    '<div style="display:flex;justify-content:space-between;margin-bottom:4px;">'+
-      '<span style="color:var(--txt2);">Player total losses</span>'+
-      '<span style="color:#e74c3c;font-weight:700;">'+fmt(totalLostAmt)+'</span>'+
-    '</div>'+
-    '<div style="display:flex;justify-content:space-between;margin-bottom:4px;">'+
-      '<span style="color:var(--txt2);">Your 25% of losses</span>'+
-      '<span style="color:var(--accent);font-weight:700;">+'+fmt(Math.floor(totalLostAmt*0.25))+'</span>'+
-    '</div>'+
-    '<div style="display:flex;justify-content:space-between;margin-bottom:4px;">'+
-      '<span style="color:var(--txt2);">Player total wins</span>'+
-      '<span style="color:#4ade80;font-weight:700;">'+fmt(totalWonAmt)+'</span>'+
-    '</div>'+
-    '<div style="display:flex;justify-content:space-between;margin-bottom:4px;">'+
-      '<span style="color:var(--txt2);">Minus 30% of wins</span>'+
-      '<span style="color:#e74c3c;font-weight:700;">-'+fmt(Math.floor(totalWonAmt*0.30))+'</span>'+
-    '</div>'+
-    '<div style="height:1px;background:var(--border);margin:8px 0;"></div>'+
-    '<div style="display:flex;justify-content:space-between;">'+
-      '<span style="color:var(--txt);font-weight:800;">Your Commission</span>'+
-      '<span style="color:var(--accent-2,#f6c90e);font-weight:900;font-size:14px;">'+fmt(net)+'</span>'+
-    '</div>'+
-  '</div>'+
-  // Recent game transactions
-  (gameLosses.length?
-    '<div style="font-size:11px;color:var(--txt2);margin-bottom:8px;font-weight:700;">Recent player losses (your 25%):</div>'+
-    gameLosses.slice(0,20).map(function(t){
-      return '<div class="earn-row">'+
-        '<div>'+
-          '<div class="earn-type">'+( t.game||'Game')+' — Player Lost</div>'+
-          '<div class="earn-meta">'+new Date(t.time).toLocaleDateString()+'</div>'+
-        '</div>'+
-        '<div class="earn-amt green">+'+fmt(Math.floor((t.amount||0)*0.25))+'</div>'+
-      '</div>';
-    }).join('')
-  :'<div class="empty">No game transactions yet.</div>');
-  wrap.innerHTML=html;
+// ── RENDER WITHDRAWALS ──
+function renderWithdrawals(wds,pending){
+  var wrap=$('wd-history-list');if(!wrap)return;
+  var list=Object.values(wds||{}).sort(function(a,b){return new Date(b.time)-new Date(a.time);});
+  if(!list.length){wrap.innerHTML='<div class="empty-state">No withdrawals yet</div>';return;}
+  wrap.innerHTML=list.map(function(w){
+    var sc=w.status==='paid'?'status-paid':w.status==='rejected'?'status-rejected':'status-pending';
+    return '<div class="wd-hist-item">'+
+      '<div>'+
+        '<div style="font-size:13px;font-weight:700;">'+fmt(w.amount||0)+'</div>'+
+        '<div style="font-size:11px;color:var(--txt2);margin-top:2px;">'+new Date(w.time||Date.now()).toLocaleDateString()+'</div>'+
+      '</div>'+
+      '<span class="wd-status '+sc+'">'+( w.status||'pending').toUpperCase()+'</span>'+
+    '</div>';
+  }).join('');
 }
 
-function renderWithdrawals(wds, pending){
-  var wrap=document.getElementById('aff-wd-history');
-  if(!Object.keys(wds).length){wrap.innerHTML='<div class="empty" style="padding:1rem 0;">No withdrawals yet. Auto-paid every Saturday.</div>';return;}
-  var html='<div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:8px;">Payout History</div>'+
-    Object.values(wds).sort(function(a,b){return new Date(b.time)-new Date(a.time);}).map(function(w){
-      var isPaid=w.status==='paid';
-      return '<div class="earn-row">'+
-        '<div>'+
-          '<div class="earn-type">'+(isPaid?'✓ Paid':'⏳ Pending')+' — Auto Saturday Payout</div>'+
-          '<div class="earn-meta">'+new Date(w.time).toLocaleDateString()+'</div>'+
-        '</div>'+
-        '<div class="earn-amt '+(isPaid?'green':'yellow')+'">'+fmt(w.amount)+'</div>'+
-      '</div>';
-    }).join('');
-  wrap.innerHTML=html;
-}
-
-function maskUsername(name){
-  if(!name||name.length<=3)return '***';
-  return name[0]+name[1]+'***'+name[name.length-1];
-}
-
-function showTab(tab){
-  ['players','earnings','wd'].forEach(function(t){
-    document.getElementById('tab-'+t).classList.toggle('active',t===tab);
-    document.getElementById('tab-'+t+'-pane').style.display=t===tab?'':'none';
+// ── WITHDRAWAL REQUEST ──
+function requestWithdrawal(){
+  var amt=parseInt($('wd-amt').value||'0');
+  var wallet=($('wd-wallet').value||'').trim();
+  aerr('wd-err','');aerr('wd-ok','');
+  if(!amt||amt<5000){aerr('wd-err','Minimum withdrawal is Rs. 5,000.');return;}
+  if(!wallet){aerr('wd-err','Enter your wallet/account details.');return;}
+  if(amt>(gState.pendingPayout||0)){aerr('wd-err','Amount exceeds available balance of '+fmt(gState.pendingPayout||0));return;}
+  var btn=document.querySelector('.wd-btn');
+  btn.textContent='Processing...';btn.disabled=true;
+  fbPush('/affiliateWithdrawals/'+affKey,{
+    amount:amt,wallet:wallet,status:'pending',
+    time:new Date().toISOString(),partnerName:affData.name||affData.username
+  }).then(function(){
+    btn.textContent='Request Withdrawal';btn.disabled=false;
+    aerr('wd-ok','✓ Withdrawal request submitted! Admin will process within 24 hours.');
+    $('wd-amt').value='';$('wd-wallet').value='';
+    loadAffStats();
+  }).catch(function(e){
+    btn.textContent='Request Withdrawal';btn.disabled=false;
+    aerr('wd-err','Error: '+e.message);
   });
 }
 
-window.showTab = showTab;
+// ── LOGOUT ──
+$('aff-logout').onclick=function(){
+  if(window._affTimer){clearInterval(window._affTimer);window._affTimer=null;}
+  affData=null;affKey=null;gState={};
+  $('p-main').style.display='none';
+  $('p-auth').style.display='flex';
+  $('aff-user').value='';$('aff-pass').value='';
+};
 
-// ── AUTO-LOGIN ──
-(function(){
-  var sk=sessionStorage.getItem('aff_key');
-  var sd=sessionStorage.getItem('aff_data');
-  if(sk&&sd){
-    try{
-      affKey=sk; affData=JSON.parse(sd);
-      // Re-fetch fresh data
-      fbGet('/affiliates/'+affKey).then(function(fresh){
-        if(fresh&&!fresh.disabled){affData=fresh;loadPanel();}
-        else{sessionStorage.clear();}
-      }).catch(function(){loadPanel();});
-    }catch(e){sessionStorage.clear();}
-  }
-})();
+// Enter key login
+$('aff-pass').onkeydown=function(e){if(e.key==='Enter')doAffLogin();};
 </script>
 </body>
 </html>
